@@ -633,6 +633,15 @@ function App() {
                   onRatingChange={handleRecipeRating}
                   savedRecipes={savedRecipes}
                 />
+              ) : selectedRecipe ? (
+                <RecipeDisplay
+                  recipes={[]}
+                  selectedRecipe={selectedRecipe}
+                  onRecipeSelect={setSelectedRecipe}
+                  onSaveRecipe={handleSaveRecipe}
+                  onRatingChange={handleRecipeRating}
+                  savedRecipes={savedRecipes}
+                />
               ) : (
                 <div className="no-recipes">
                   <h3>No recipes found</h3>
@@ -643,27 +652,26 @@ function App() {
                 
                     </div>
                   )}
-                  
-                  {/* Show top rated recipes when no matches found */}
-                  <TopRatedRecipes 
-                    recipes={recipes}
-                    dietaryRestrictions={dietaryRestrictions}
-                    onSaveRecipe={handleSaveRecipe}
-                    savedRecipes={savedRecipes}
-                    onRecipeSelect={setSelectedRecipe}
-                  />
                 </div>
               )}
               
               {selectedRecipe && (
                 <SubstitutionPanel recipe={selectedRecipe} />
               )}
-              
+
+              {/* Always show AI suggestions above Top Rated */}
               <AIRecipeSuggestions 
                 ingredients={recognizedIngredients}
                 dietaryRestrictions={dietaryRestrictions}
                 onSaveRecipe={handleSaveRecipe}
                 savedRecipes={savedRecipes}
+              />
+              <TopRatedRecipes 
+                recipes={recipes}
+                dietaryRestrictions={dietaryRestrictions}
+                onSaveRecipe={handleSaveRecipe}
+                savedRecipes={savedRecipes}
+                onRecipeSelect={setSelectedRecipe}
               />
             </div>
           </main>

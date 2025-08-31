@@ -1,5 +1,5 @@
 import React from 'react'
-import { Star, Clock, Users, ChefHat, Bookmark, Activity } from 'lucide-react'
+import { Star, Clock, Users, ChefHat, Activity } from 'lucide-react'
 import RecipeRating from './RecipeRating'
 
 const TopRatedRecipes = ({ recipes, dietaryRestrictions = [], onSaveRecipe, savedRecipes, onRecipeSelect }) => {
@@ -147,15 +147,14 @@ const TopRatedRecipes = ({ recipes, dietaryRestrictions = [], onSaveRecipe, save
               
               <div className="top-rated-actions">
                 <button 
-                  className={`save-recipe-btn ${savedRecipes?.some(saved => saved.id === recipe.id) ? 'saved' : ''}`}
+                  className="view-recipe-btn"
                   onClick={(e) => {
                     e.stopPropagation();
-                    onSaveRecipe(recipe);
+                    onRecipeSelect(recipe);
                   }}
-                  aria-label={`${savedRecipes?.some(saved => saved.id === recipe.id) ? 'Remove from' : 'Add to'} saved recipes`}
+                  aria-label="View recipe"
                 >
-                  <Bookmark size={16} />
-                  {savedRecipes?.some(saved => saved.id === recipe.id) ? 'Saved' : 'Save'}
+                  View
                 </button>
               </div>
             </div>

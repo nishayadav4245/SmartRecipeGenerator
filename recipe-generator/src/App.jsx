@@ -652,38 +652,27 @@ function App() {
                 
                     </div>
                   )}
-                  
-                  {/* Offer AI suggestions above Top Rated */}
-                  <AIRecipeSuggestions 
-                    ingredients={recognizedIngredients}
-                    dietaryRestrictions={dietaryRestrictions}
-                    onSaveRecipe={handleSaveRecipe}
-                    savedRecipes={savedRecipes}
-                  />
-
-                  {/* Show top rated recipes when no matches found */}
-                  <TopRatedRecipes 
-                    recipes={recipes}
-                    dietaryRestrictions={dietaryRestrictions}
-                    onSaveRecipe={handleSaveRecipe}
-                    savedRecipes={savedRecipes}
-                    onRecipeSelect={setSelectedRecipe}
-                  />
                 </div>
               )}
               
               {selectedRecipe && (
                 <SubstitutionPanel recipe={selectedRecipe} />
               )}
-              
-              {matchedRecipes.length > 0 && (
-                <AIRecipeSuggestions 
-                  ingredients={recognizedIngredients}
-                  dietaryRestrictions={dietaryRestrictions}
-                  onSaveRecipe={handleSaveRecipe}
-                  savedRecipes={savedRecipes}
-                />
-              )}
+
+              {/* Always show AI suggestions above Top Rated */}
+              <AIRecipeSuggestions 
+                ingredients={recognizedIngredients}
+                dietaryRestrictions={dietaryRestrictions}
+                onSaveRecipe={handleSaveRecipe}
+                savedRecipes={savedRecipes}
+              />
+              <TopRatedRecipes 
+                recipes={recipes}
+                dietaryRestrictions={dietaryRestrictions}
+                onSaveRecipe={handleSaveRecipe}
+                savedRecipes={savedRecipes}
+                onRecipeSelect={setSelectedRecipe}
+              />
             </div>
           </main>
         </>

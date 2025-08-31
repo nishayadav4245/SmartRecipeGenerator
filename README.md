@@ -1,42 +1,115 @@
+# 🍳 Smart Recipe Generator
+
+AI-powered recipe generator that suggests meals based on ingredients you have. Built with **React 19 + Vite** and integrated with **Google Gemini AI** for intelligent recipe generation.
+
+---
+
 ## 🎬 Demo Video
-
-
 
 [![Watch the video](https://img.youtube.com/vi/bf1H7X8f4L0/0.jpg)](https://youtu.be/bf1H7X8f4L0)
 
+---
 
-Languages: JavaScript (ES modules), JSX, CSS3
-Framework: react@19.1.1, react-dom@19.1.1
-Build tool: vite@^7.1.2 with @vitejs/plugin-react@^5.0.0
-AI SDK: @google/generative-ai@^0.24.1 (uses VITE_GEMINI_API_KEY)
-HTTP client: axios@^1.11.0
-UI/UX libraries: lucide-react@^0.542.0, react-dropzone@^14.3.8
-Linting: eslint@^9.33.0, @eslint/js@^9.33.0, eslint-plugin-react-hooks@^5.2.0, eslint-plugin-react-refresh@^0.4.20, globals@^16.3.0
-NPM scripts: dev (vite), build (vite build), lint (eslint .), preview (vite preview)
-Config files: vite.config.js (base "./", React plugin), eslint.config.js, package.json (type: "module")
-HTML entry: index.html
-App entry: src/main.jsx, src/App.jsx
-Components: AIRecipeSuggestions.jsx, DietaryFilters.jsx, ImageUpload.jsx, IngredientList.jsx, Navbar.jsx, RecipeDisplay.jsx, RecipeRating.jsx, SavedRecipes.jsx, TopRatedRecipes.jsx, SubstitutionPanel.jsx
-Styling: src/App.css, src/index.css, src/components/SavedRecipes.css
-Data: src/data/recipes.js
-Public assets: public/_redirects
-Docs: README.md, AI_SETUP.md, DEPLOYMENT.md
+## 🚀 Tech Stack
 
+**Languages & Frameworks**
+- JavaScript (ES modules)
+- JSX, CSS3
+- React 19.1.1 + React DOM 19.1.1
+- Vite 7.1.2 with @vitejs/plugin-react
 
-Approach :
+**AI SDK**
+- [@google/generative-ai@^0.24.1](https://www.npmjs.com/package/@google/generative-ai)  
+  Uses **VITE_GEMINI_API_KEY**
 
-Frontend architecture: Build a single-page app with React 19 (hooks, functional components). Keep state co-located in App.jsx and pass narrowly scoped props to components (ImageUpload, DietaryFilters, RecipeDisplay, SavedRecipes, TopRatedRecipes).
+**HTTP Client**
+- axios@^1.11.0
 
-Data model & matching: Store curated recipes in src/data/recipes.js. Implement an ingredient-overlap scoring function and dietary tag filters in App.jsx, returning ranked candidates.
+**UI/UX**
+- lucide-react@^0.542.0 (icons)
+- react-dropzone@^14.3.8 (file uploads)
 
-AI integration (Gemini): Use @google/generative-ai with VITE_GEMINI_API_KEY to:
+**Quality & Linting**
+- eslint@^9.33.0
+- @eslint/js@^9.33.0
+- eslint-plugin-react-hooks@^5.2.0
+- eslint-plugin-react-refresh@^0.4.20
+- globals@^16.3.0
 
-Generate recipes when no strong matches exist.
-Optionally process uploaded images for ingredient detection. Add request timeouts, retries/backoff, and guardrails for token/size limits. Use axios for any future backend calls.
-Image ingestion: Use react-dropzone for drag-and-drop; validate file type/size and show progress. Convert to base64 or Blob streams as required by Gemini Vision.
+---
 
-UI/UX: Use lucide-react icons and responsive CSS in App.css/index.css. Provide clear loading/empty/error states and optimistic interactions for save/rate flows.
+## ⚡ NPM Scripts
 
-Quality: Enforce ESLint (eslint.config.js) with React Hooks and Refresh plugins in CI. Run npm run lint on commit.
+- `npm run dev` → Start dev server (Vite)  
+- `npm run build` → Build for production  
+- `npm run preview` → Preview production build  
+- `npm run lint` → Run ESLint checks  
 
-Build & deploy: Use Vite for fast dev (npm run dev) and production builds (npm run build). Keep vite.config.js base "./" for static hosts. Inject .env at build, deploy dist/ to Vercel/Netlify/GitHub Pages with public/_redirects as needed.
+---
+
+## 🧩 Approach
+
+### 🎨 Frontend Architecture
+- **Single-page React app** with hooks + functional components  
+- State managed in `App.jsx`  
+- Narrowly scoped props passed to child components  
+
+### 🥗 Data Model & Matching
+- Recipes stored in `src/data/recipes.js`  
+- Ingredient-overlap scoring function  
+- Dietary tag filters (vegetarian, vegan, gluten-free, etc.)  
+
+### 🤖 AI Integration (Gemini)
+- Uses `@google/generative-ai` with `VITE_GEMINI_API_KEY`  
+- Generates new recipes when no strong matches exist  
+- Can process uploaded images for ingredient detection  
+- Implements **timeouts, retries, backoff, and guardrails**  
+
+### 📸 Image Ingestion
+- Drag-and-drop via `react-dropzone`  
+- Validates file type/size  
+- Converts to Base64/Blob streams for Gemini Vision  
+
+### 🖼️ UI/UX
+- Clean and responsive design with **lucide-react** icons  
+- Clear **loading, empty, and error states**  
+- Optimistic UI for save/rating interactions  
+
+### ✅ Quality
+- Enforced ESLint rules (`eslint.config.js`)  
+- React Hooks + Refresh plugins  
+- `npm run lint` before commits  
+
+### 🌍 Build & Deploy
+- Vite for blazing-fast dev and builds  
+- Configured for static hosts (`vite.config.js` with base `"./"`)  
+- Deployable to **Vercel, Netlify, or GitHub Pages**  
+- `public/_redirects` for SPA routing support  
+
+---
+
+## 📖 Docs
+
+- [AI Setup Guide](./AI_SETUP.md)  
+- [Deployment Guide](./DEPLOYMENT.md)  
+
+---
+
+## ✨ Highlights
+✔ Ingredient-based recipe matching  
+✔ Gemini AI fallback for creative recipes  
+✔ Image upload support  
+✔ Save and rate recipes  
+✔ Responsive, modern UI  
+
+---
+
+## 🤝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you’d like to change.
+
+---
+
+## 📜 License
+
+MIT License © 2025 [Nisha Yadav](https://github.com/nishayadav4245)

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Connection Test</title>
+</head>
+<body>
+    <h1>Backend Connection Test</h1>
+    <button onclick="testBackend()">Test Backend Connection</button>
+    <div id="result"></div>
+
+    <script>
+        async function testBackend() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing connection...';
+            
+            try {
+                const response = await fetch('http://localhost:5000/api/health');
+                const data = await response.json();
+                resultDiv.innerHTML = `
+                    <h3>✅ Backend Connected Successfully!</h3>
+                    <p><strong>Status:</strong> ${data.status}</p>
+                    <p><strong>Message:</strong> ${data.message}</p>
+                    <p><strong>Timestamp:</strong> ${data.timestamp}</p>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <h3>❌ Backend Connection Failed</h3>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p>Make sure your backend server is running on port 5000</p>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

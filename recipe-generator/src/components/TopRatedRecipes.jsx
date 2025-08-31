@@ -1,5 +1,5 @@
 import React from 'react'
-import { Star, Clock, Users, ChefHat, Bookmark, Activity } from 'lucide-react'
+import { Star, Clock, Users, ChefHat, Bookmark, Activity, ArrowRight } from 'lucide-react'
 import RecipeRating from './RecipeRating'
 
 const TopRatedRecipes = ({ recipes, dietaryRestrictions = [], onSaveRecipe, savedRecipes, onRecipeSelect }) => {
@@ -146,6 +146,16 @@ const TopRatedRecipes = ({ recipes, dietaryRestrictions = [], onSaveRecipe, save
               </div>
               
               <div className="top-rated-actions">
+                <button 
+                  className="view-recipe-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onRecipeSelect(recipe);
+                  }}
+                  aria-label={`View recipe details for ${recipe.name}`}
+                >
+                  View Recipe <ArrowRight size={16} className="arrow-icon" />
+                </button>
                 <button 
                   className={`save-recipe-btn ${savedRecipes?.some(saved => saved.id === recipe.id) ? 'saved' : ''}`}
                   onClick={(e) => {

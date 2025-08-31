@@ -65,8 +65,16 @@ Important:
 
 Only return valid JSON, no other text.`
 
-      // Generate content with image
-      const result = await model.generateContent([prompt, base64Image])
+      // Generate content with image using inlineData format expected by Gemini
+      const result = await model.generateContent([
+        { text: prompt },
+        {
+          inlineData: {
+            mimeType: imageFile?.type || 'image/jpeg',
+            data: base64Image
+          }
+        }
+      ])
       const response = await result.response
       const text = response.text()
       

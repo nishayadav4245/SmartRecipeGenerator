@@ -65,8 +65,16 @@ Important:
 
 Only return valid JSON, no other text.`
 
-      // Generate content with image
-      const result = await model.generateContent([prompt, base64Image])
+      // Generate content with image (use correct inlineData format with mimeType)
+      const result = await model.generateContent([
+        prompt,
+        {
+          inlineData: {
+            data: base64Image,
+            mimeType: imageFile?.type || 'image/jpeg'
+          }
+        }
+      ])
       const response = await result.response
       const text = response.text()
       

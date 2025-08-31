@@ -5,22 +5,81 @@ import RecipeRating from './RecipeRating'
 const RecipeDisplay = ({ recipes, selectedRecipe, onRecipeSelect, onSaveRecipe, onRatingChange, savedRecipes }) => {
   const [clickedButton, setClickedButton] = useState(null);
 
-  if (!recipes || recipes.length === 0) {
+  // If no matches but a recipe is selected (e.g., from Top Rated), render details-only mode
+  if ((!recipes || recipes.length === 0) && selectedRecipe) {
     return (
       <div className="recipe-display">
-        <h3>🍽️ Recipe Matches</h3>
-        <div className="no-recipes-message">
-          <p>No recipes found containing ALL your ingredients</p>
-          <p className="search-logic-info">
-            <strong>🔍 Search Logic:</strong> Recipes must contain ALL specified ingredients (AND logic). 
-            For example, searching "potato + paneer" will only show recipes with both ingredients.
-          </p>
-          <p className="no-recipes-tips">
-            <strong>💡 Tips:</strong>
-            <br />• Try searching with fewer ingredients
-            <br />• Check ingredient spelling
-            <br />• Use common ingredient names
-          </p>
+        <h3>📖 Recipe Details</h3>
+        <div id="selected-recipe-details" className="selected-recipe-details">
+          <h4>📖 {selectedRecipe.name}</h4>
+          <div className="recipe-info">
+            <div className="info-section">
+              <h5>Ingredients:</h5>
+              <ul className="ingredients-list">
+                {selectedRecipe.ingredients.map((ingredient, index) => (
+                  <li key={index}>
+                    <strong>{ingredient.amount}</strong> {ingredient.name}
+                    {ingredient.notes && <small> ({ingredient.notes})</small>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="info-section">
+              <h5>Instructions:</h5>
+              <ol className="instructions-list">
+                {selectedRecipe.instructions.map((instruction, index) => (
+                  <li key={index}>{instruction}</li>
+                ))}
+              </ol>
+            </div>
+            <div className="recipe-stats">
+              <div className="stat">
+                <Clock size={16} />
+                <span>Prep: {selectedRecipe.prepTime} min</span>
+              </div>
+              <div className="stat">
+                <Clock size={16} />
+                <span>Cook: {selectedRecipe.cookTime} min</span>
+              </div>
+              <div className="stat">
+                <Users size={16} />
+                <span>Serves: {selectedRecipe.servings}</span>
+              </div>
+            </div>
+            {selectedRecipe.nutrition && (
+              <div className="info-section">
+                <h5>Nutrition Information (per serving):</h5>
+                <div className="detailed-nutrition">
+                  <div className="nutrition-row">
+                    <div className="nutrition-item-detailed">
+                      <span className="nutrition-label-detailed">Calories</span>
+                      <span className="nutrition-value-detailed">{selectedRecipe.nutrition.calories}</span>
+                    </div>
+                    <div className="nutrition-item-detailed">
+                      <span className="nutrition-label-detailed">Protein</span>
+                      <span className="nutrition-value-detailed">{selectedRecipe.nutrition.protein}g</span>
+                    </div>
+                    <div className="nutrition-item-detailed">
+                      <span className="nutrition-label-detailed">Carbohydrates</span>
+                      <span className="nutrition-value-detailed">{selectedRecipe.nutrition.carbs}g</span>
+                    </div>
+                    <div className="nutrition-item-detailed">
+                      <span className="nutrition-label-detailed">Fat</span>
+                      <span className="nutrition-value-detailed">{selectedRecipe.nutrition.fat}g</span>
+                    </div>
+                    <div className="nutrition-item-detailed">
+                      <span className="nutrition-label-detailed">Fiber</span>
+                      <span className="nutrition-value-detailed">{selectedRecipe.nutrition.fiber}g</span>
+                    </div>
+                    <div className="nutrition-item-detailed">
+                      <span className="nutrition-label-detailed">Sugar</span>
+                      <span className="nutrition-value-detailed">{selectedRecipe.nutrition.sugar}g</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     )

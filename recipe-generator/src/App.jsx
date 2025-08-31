@@ -633,6 +633,15 @@ function App() {
                   onRatingChange={handleRecipeRating}
                   savedRecipes={savedRecipes}
                 />
+              ) : selectedRecipe ? (
+                <RecipeDisplay
+                  recipes={[]}
+                  selectedRecipe={selectedRecipe}
+                  onRecipeSelect={setSelectedRecipe}
+                  onSaveRecipe={handleSaveRecipe}
+                  onRatingChange={handleRecipeRating}
+                  savedRecipes={savedRecipes}
+                />
               ) : (
                 <div className="no-recipes">
                   <h3>No recipes found</h3>
